@@ -34,4 +34,13 @@ public class InfoCarroService {
             }
         }
     }
+    public ResponseEntity<ModeloDeResposta> remover(Integer id) {
+    infoCarroRepository.deleteById(id);
+    modeloResposta.setMensagem("As informações do carro foram removidas com sucesso");
+    return new ResponseEntity<ModeloDeResposta>(modeloResposta, HttpStatus.OK);
+    }
+
+    public Iterable<InfoCarro> listarInformacoes() {
+        return infoCarroRepository.findAll();
+    }
 }

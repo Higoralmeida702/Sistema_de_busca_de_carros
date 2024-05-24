@@ -1,11 +1,11 @@
 package com.higor.sistema_de_busca_de_carros.Controller;
 
 import com.higor.sistema_de_busca_de_carros.Entities.InfoCarro;
+import com.higor.sistema_de_busca_de_carros.Entities.ModeloDeResposta;
 import com.higor.sistema_de_busca_de_carros.Service.InfoCarroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Optional;
 
 @RestController
@@ -33,4 +33,13 @@ public class InfoCarroController {
         return infoCarroService.cadastrar(infoCarro, "cadastrar");
     }
 
+    @DeleteMapping("/remover/{id}")
+    public ResponseEntity<ModeloDeResposta> remover (@PathVariable Integer id) {
+        return infoCarroService.remover(id);
+    }
+
+    @GetMapping("/listarInformacoes")
+    public Iterable<InfoCarro> listarInformacoes() {
+        return infoCarroService.listarInformacoes();
+    }
 }
