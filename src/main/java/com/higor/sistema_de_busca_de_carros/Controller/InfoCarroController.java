@@ -17,7 +17,7 @@ public class InfoCarroController {
     @Autowired
     private InfoCarroService infoCarroService;
 
-    @GetMapping("/buscarPorCodigoVeiculo")
+    @GetMapping("/buscarPorCodigoVeiculo/{codigoDoVeiculo}")
         public ResponseEntity<?> buscarPorCodigoVeiculo (@PathVariable String codigoDoVeiculo){
             try {
                 Optional<InfoCarro> codigoVeiculo = infoCarroService.buscarPorCodigoVeiculo(codigoDoVeiculo);
