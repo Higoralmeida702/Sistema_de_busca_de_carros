@@ -3,7 +3,9 @@ package com.higor.sistema_de_busca_de_carros.Controller;
 import com.higor.sistema_de_busca_de_carros.Entities.InfoCarro;
 import com.higor.sistema_de_busca_de_carros.Entities.ModeloDeResposta;
 import com.higor.sistema_de_busca_de_carros.Service.InfoCarroService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
@@ -42,4 +44,15 @@ public class InfoCarroController {
     public Iterable<InfoCarro> listarInformacoes() {
         return infoCarroService.listarInformacoes();
     }
+
+    @PutMapping("/alterar/{codigoDoVeiculo}")
+        public ResponseEntity<?> alterarInformacao(@PathVariable String codigoDoVeiculo, @RequestBody InfoCarro infoCarro) {
+            try {
+                ResponseEntity<?> response = infoCarroService.atualizarCarroInformacoes(codigoDoVeiculo, infoCarro);
+                return response;
+            }catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body("Erro ao alterar informação do carro do codigo" + codigoDoVeiculo + ":" + e.getMessage());
+            }
+        }
 }
