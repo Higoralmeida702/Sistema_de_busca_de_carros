@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import './Cadastrar.css';
 const Cadastrar = () => {
    const [objInfoCarro, setObjInfoCarro] = useState({
       id: '',
@@ -58,11 +58,12 @@ const Cadastrar = () => {
             }
          });
    };
+
    return (
       <div>
-         <h1>Cadastrar Carro</h1>
-         <form>
-            <div>
+         <h1 className="tituloCadastrar">Cadastrar Carro</h1>
+         <form className="form-grid">
+            <div className="form-group">
                <label>Código do Veículo:</label>
                <input
                   type="text"
@@ -71,7 +72,7 @@ const Cadastrar = () => {
                   onChange={handleChange}
                />
             </div>
-            <div>
+            <div className="form-group">
                <label>Placa:</label>
                <input
                   type="text"
@@ -80,7 +81,7 @@ const Cadastrar = () => {
                   onChange={handleChange}
                />
             </div>
-            <div>
+            <div className="form-group">
                <label>Modelo:</label>
                <input
                   type="text"
@@ -89,7 +90,7 @@ const Cadastrar = () => {
                   onChange={handleChange}
                />
             </div>
-            <div>
+            <div className="form-group">
                <label>Nome do Carro:</label>
                <input
                   type="text"
@@ -98,7 +99,7 @@ const Cadastrar = () => {
                   onChange={handleChange}
                />
             </div>
-            <div>
+            <div className="form-group">
                <label>Cor:</label>
                <input
                   type="text"
@@ -107,7 +108,7 @@ const Cadastrar = () => {
                   onChange={handleChange}
                />
             </div>
-            <div>
+            <div className="form-group">
                <label>Proprietário:</label>
                <input
                   type="text"
@@ -116,7 +117,7 @@ const Cadastrar = () => {
                   onChange={handleChange}
                />
             </div>
-            <div>
+            <div className="form-group">
                <label>Contato do Proprietário:</label>
                <input
                   type="text"
@@ -125,7 +126,7 @@ const Cadastrar = () => {
                   onChange={handleChange}
                />
             </div>
-            <div>
+            <div className="form-group">
                <label>Categoria:</label>
                <input
                   type="text"
@@ -134,7 +135,7 @@ const Cadastrar = () => {
                   onChange={handleChange}
                />
             </div>
-            <div>
+            <div className="form-group">
                <label>Marca:</label>
                <input
                   type="text"
@@ -143,7 +144,7 @@ const Cadastrar = () => {
                   onChange={handleChange}
                />
             </div>
-            <div>
+            <div className="form-group">
                <label>Ano de Fabricação:</label>
                <input
                   type="text"
