@@ -1,0 +1,27 @@
+.resultadosMostrados {
+    border: 2px solid #e8e8e8;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: #bebebe;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  color: #000;
+}
+
+.consultarVeiculos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 3rem;
+    gap: 10px;
+}
+
+.btnBuscar {
+    margin: 0 10px;
+}
+
+.result-color {
+    color: rgba(255, 0, 0, 0.730);
+}

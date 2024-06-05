@@ -74,12 +74,7 @@ const Cadastrar = () => {
             </div>
             <div className="form-group">
                <label>Placa:</label>
-               <input
-                  type="text"
-                  name="placa"
-                  value={objInfoCarro.placa}
-                  onChange={handleChange}
-               />
+               <input type="text" name="placa" value={objInfoCarro.placa} onChange={handleChange} />
             </div>
             <div className="form-group">
                <label>Modelo:</label>
@@ -101,12 +96,7 @@ const Cadastrar = () => {
             </div>
             <div className="form-group">
                <label>Cor:</label>
-               <input
-                  type="text"
-                  name="cor"
-                  value={objInfoCarro.cor}
-                  onChange={handleChange}
-               />
+               <input type="text" name="cor" value={objInfoCarro.cor} onChange={handleChange} />
             </div>
             <div className="form-group">
                <label>Proprietário:</label>
@@ -137,12 +127,7 @@ const Cadastrar = () => {
             </div>
             <div className="form-group">
                <label>Marca:</label>
-               <input
-                  type="text"
-                  name="marca"
-                  value={objInfoCarro.marca}
-                  onChange={handleChange}
-               />
+               <input type="text" name="marca" value={objInfoCarro.marca} onChange={handleChange} />
             </div>
             <div className="form-group">
                <label>Ano de Fabricação:</label>
