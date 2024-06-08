@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import './exibir.css';
 
 const Exibir = () => {
    const [userData, setUserData] = useState(null);
-   const [isEditando, setIsEditando] = useState(false);
+   const [isEditing, setIsEditing] = useState(false);
    const [editData, setEditData] = useState({});
    const [codigoDoVeiculo, setCodigoDoVeiculo] = useState('');
    const [error, setError] = useState(null);
@@ -16,7 +18,7 @@ const Exibir = () => {
          .then((response) => {
             setUserData(response.data);
             setError(null);
-            setIsEditando(false);
+            setIsEditing(false);
          })
          .catch(() => {
             setUserData(null);
@@ -29,10 +31,48 @@ const Exibir = () => {
    };
 
    const handleEdit = () => {
-      isEditando(true);
+      setIsEditing(true);
       setEditData({
-         proprietario: userData.proprietario,
+         ...userData,
+         placa: userData.placa || '',
+         modelo: userData.modelo || '',
+         nomeCarro: userData.nomeCarro || '',
+         cor: userData.cor || '',
+         proprietario: userData.proprietario || '',
+         contatoProprietario: userData.contatoProprietario || '',
+         categoria: userData.categoria || '',
+         marca: userData.marca || '',
+         anoFabricacao: userData.anoFabricacao || '',
       });
+   };
+
+   const handleSave = () => {
+      console.log('Dados enviados para atualização:', editData);
+
+      axios
+         .put(`http://localhost:8080/alterar/${editData.codigoDoVeiculo}`, editData, {
+            headers: {
+               'Content-Type': 'application/json',
+            },
+         })
+         .then((response) => {
+            setUserData(response.data);
+            setIsEditing(false);
+            alert('Dados alterados com sucesso');
+         })
+         .catch((error) => {
+            console.error('Erro ao alterar dados:', error);
+            console.log('Detalhes do erro:', error.response.data);
+            alert('Erro ao alterar dados');
+         });
+   };
+
+   const handleInputChange = (e) => {
+      const { name, value } = e.target;
+      setEditData((prevData) => ({
+         ...prevData,
+         [name]: value || '',
+      }));
    };
    return (
       <div>
@@ -63,7 +103,7 @@ const Exibir = () => {
          <div>
             {error && <p>{error}</p>}
             {removalError && <p>{removalError}</p>}
-            {userData && !isEditando && (
+            {userData && !isEditing && (
                <div>
                   <div className="form-grid">
                      <p className="resultadosMostrados">
@@ -103,17 +143,109 @@ const Exibir = () => {
                   <button className="btnSalvar">Salvar</button>
                </div>
             )}
+            {isEditing && (
+               <div className="editarAluno">
+                  <h2>Editar dados do carro {userData.nomeCarro}</h2>
+                  <form>
+                     <label>
+                        Placa:
+                        <input
+                           autoComplete="off"
+                           type="text"
+                           name="placa"
+                           value={editData.placa || ''}
+                           onChange={handleInputChange}
+                        />
+                     </label>
+                     <label>
+                        Modelo:
+                        <input
+                           autoComplete="off"
+                           type="text"
+                           name="placa"
+                           value={editData.modelo || ''}
+                           onChange={handleInputChange}
+                        />
+                     </label>
+                     <label>
+                        Nome do Carro:
+                        <input
+                           autoComplete="off"
+                           type="text"
+                           name="nomeCarro"
+                           value={editData.nomeCarro || ''}
+                           onChange={handleInputChange}
+                        />
+                     </label>
+                     <label>
+                        Cor do carro:
+                        <input
+                           autoComplete="off"
+                           type="text"
+                           name="corCarro"
+                           value={editData.cor || ''}
+                           onChange={handleInputChange}
+                        />
+                     </label>
+                     <label>
+                        proprietario:
+                        <input
+                           autoComplete="off"
+                           type="text"
+                           name="proprietario"
+                           value={editData.proprietario || ''}
+                           onChange={handleInputChange}
+                        />
+                     </label>
+                     <label>
+                        Contato Proprietario:
+                        <input
+                           autoComplete="off"
+                           type="number"
+                           name="contatoProprietario"
+                           value={editData.orgaoExpedidor || ''}
+                           onChange={handleInputChange}
+                        />
+                     </label>
+                     <label>
+                        Categoria:
+                        <input
+                           autoComplete="off"
+                           type="text"
+                           name="categoria"
+                           value={editData.categoria || ''}
+                           onChange={handleInputChange}
+                        />
+                     </label>
+                     <label>
+                        Marca:
+                        <input
+                           autoComplete="off"
+                           type="text"
+                           name="marca"
+                           value={editData.marca || ''}
+                           onChange={handleInputChange}
+                        />
+                     </label>
+                     <label>
+                        Ano de fabricação:
+                        <input
+                           autoComplete="off"
+                           type="number"
+                           name="anoFabricacao"
+                           value={editData.anoFabricacao || ''}
+                           onChange={handleInputChange}
+                        />
+                     </label>
+                  </form>
+                  <button onClick={handleSave} className="btnSalvar">
+                     Salvar
+                  </button>
+               </div>
+            )}
          </div>
       </div>
    );
-};
-
-const handleInputChange = (e) => {
-   const { name, value } = e.target;
-   setEditData((prevData) => ({
-      ...prevData,
-      [name]: value || '',
-   }));
 };
 
 export default Exibir;
