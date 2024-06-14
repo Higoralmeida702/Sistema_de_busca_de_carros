@@ -74,6 +74,24 @@ const Exibir = () => {
          [name]: value || '',
       }));
    };
+
+   const remover = () => {
+      const isConfirmed = window.confirm('Tem certeza que deseja remover este veiculo?');
+
+      if (isConfirmed) {
+         axios
+            .delete(`http://localhost:8080/remover/${userData.id}`)
+            .then(() => {
+               setUserData(null);
+               alert('veiculo removido com sucesso');
+            })
+            .catch((error) => {
+               console.error('Erro ao remover veiculo', error);
+               alert('Erro ao remover veiculo ');
+            });
+      }
+   };
+
    return (
       <div>
          <div className="consultarVeiculos">
@@ -95,7 +113,9 @@ const Exibir = () => {
                      <button onClick={handleEdit} className="btnBuscar">
                         Editar
                      </button>
-                     <button className="btnBuscar">Remover</button>
+                     <button className="btnBuscar" onClick={remover}>
+                        Remover
+                     </button>
                   </>
                )}
             </div>
